@@ -36,6 +36,13 @@ async function run() {
             res.send(product)
         })
 
+        // api for post data form user
+        app.post('/product', async(req, res)=>{
+            const newProduct = req.body
+            const result = await productCollection.insertOne(newProduct)
+            res.send(result)
+        })
+
     }
     finally {
 
