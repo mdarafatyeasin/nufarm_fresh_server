@@ -47,20 +47,20 @@ async function run() {
         })
 
         // PUT
-        app.put('/product/:id', async (req, res) => {
-            const id = req.params.id
-            const updateQuantity = req.body
-            const filter = { _id: ObjectId(id) }
-            const options = { upsert: true }
-            const updatedDoc = {
-                $set: {
-                    quantity: updateQuantity.newQuantity
-                }
-            }
-            const result = await productCollection.updateOne(filter, options, updatedDoc)
-            // const answer = await productCollection.findOne(filter)
-            res.send(result)
-        })
+        // app.put('/product/:id', async (req, res) => {
+        //     const id = req.params.id
+        //     const updateQuantity = req.body
+        //     const filter = { _id: ObjectId(id) }
+        //     const options = { upsert: true }
+        //     const updatedDoc = {
+        //         $set: {
+        //             quantity: updateQuantity.newQuantity
+        //         }
+        //     }
+        //     const result = await productCollection.updateOne(filter, options, updatedDoc)
+        //     // const answer = await productCollection.findOne(filter)
+        //     res.send(result)
+        // })
 
 
         // DELETE
