@@ -47,6 +47,7 @@ async function run() {
         })
 
         // PUT
+        // api for update
         // app.put('/product/:id', async (req, res) => {
         //     const id = req.params.id
         //     const updateQuantity = req.body
