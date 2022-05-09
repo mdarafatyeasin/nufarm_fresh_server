@@ -20,6 +20,7 @@ async function run() {
         await client.connect()
         const productCollection = client.db("nuFarmFresh").collection("product");
 
+        // GET
         // api for all data load
         app.get('/product', async (req, res) => {
             const query = {}
@@ -28,6 +29,7 @@ async function run() {
             res.send(products)
         })
 
+        // GET
         // api for single data load by single id
         app.get('/product/:id', async (req, res) => {
             const id = req.params.id
@@ -36,12 +38,40 @@ async function run() {
             res.send(product)
         })
 
+        // POST
         // api for post data form user
-        app.post('/product', async(req, res)=>{
+        app.post('/product', async (req, res) => {
             const newProduct = req.body
             const result = await productCollection.insertOne(newProduct)
             res.send(result)
         })
+
+        // PUT
+        app.put('/product/:id', async (req, res) => {
+            const id = req.params.id
+            const updateQuantity = req.body
+            const filter = { _id: ObjectId(id) }
+            const options = { upsert: true }
+            const updatedDoc = {
+                $set: {
+                    quantity: updateQuantity.newQuantity
+                }
+            }
+            const result = await productCollection.updateOne(filter, options, updatedDoc)
+            // const answer = await productCollection.findOne(filter)
+            res.send(result)
+        })
+
+
+        // DELETE
+        // api for delete data form database
+        app.delete('/product/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: ObjectId(id) }
+            const result = await productCollection.deleteOne(query)
+            res.send(result)
+        })
+
 
     }
     finally {
